@@ -1,7 +1,8 @@
-import {Controller, Get} from '@nestjs/common';
+import {Body, Controller, Get, Post} from '@nestjs/common';
 import {Observable} from 'rxjs';
-import {PostModel} from './models/PostModel';
 import {PostService} from './services/PostService';
+import {PostEntity} from './entities/PostEntity';
+import {CreatePostDto} from './dtos/CreatePostDto';
 
 @Controller('posts')
 export class PostController {
@@ -10,7 +11,12 @@ export class PostController {
     }
 
     @Get()
-    findAll(): Observable<PostModel[]> {
+    findAll(): Observable<PostEntity[]> {
         return this.postService.findAll();
+    }
+
+    @Post()
+    create(@Body() createPostDto: CreatePostDto) {
+        return this.postService.create(createPostDto);
     }
 }
