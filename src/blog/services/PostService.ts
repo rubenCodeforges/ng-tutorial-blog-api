@@ -7,6 +7,7 @@ import {CreatePostDto} from '../dtos/CreatePostDto';
 import {PostDto} from '../dtos/PostDto';
 import {map} from 'rxjs/operators';
 import * as _ from 'lodash';
+import {EditPostDto} from '../dtos/EditPostDto';
 
 @Injectable()
 export class PostService {
@@ -22,5 +23,13 @@ export class PostService {
 
     public create(createPostDto: CreatePostDto): Promise<PostDto> {
        return this.postRepository.save(createPostDto);
+    }
+
+    public edit(editPostDto: EditPostDto): Promise<PostDto> {
+        return this.postRepository.save(editPostDto);
+    }
+
+    public delete(postId: number): void {
+        this.postRepository.delete(postId);
     }
 }
